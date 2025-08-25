@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nail Studio Express</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Nail Studio Express</h1>
+  <div class="studio">
+    <div class="hand">
+      <img src="assets/hand.png" alt="Hand">
+      <div class="nails">
+        <canvas id="nail1"></canvas>
+        <canvas id="nail2"></canvas>
+        <canvas id="nail3"></canvas>
+        <canvas id="nail4"></canvas>
+        <canvas id="nail5"></canvas>
+      </div>
+    </div>
+    <div class="palette">
+      <h2>Colors</h2>
+      <div id="colors"></div>
+      <h2>Stickers</h2>
+      <div id="stickers"></div>
+      <button onclick="resetNails()">Reset</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

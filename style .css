@@ -1,0 +1,52 @@
+body {
+  font-family: sans-serif;
+  background: #fce4ec;
+  text-align: center;
+}
+
+.studio {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.hand {
+  position: relative;
+}
+
+.hand img {
+  width: 300px;
+}
+
+.nails canvas {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#nail1 { top: 60px; left: 50px; }
+#nail2 { top: 50px; left: 100px; }
+#nail3 { top: 40px; left: 150px; }
+#nail4 { top: 50px; left: 200px; }
+#nail5 { top: 60px; left: 250px; }
+
+.palette div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.palette img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.palette img:hover {
+  border-color: #d81b60;
+}
