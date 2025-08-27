@@ -29,7 +29,7 @@ h1 {
   max-width: 100%;
 }
 
-.hand img {
+#handCanvas {
   max-width: 100%;
   height: auto;
   display: block;
@@ -41,6 +41,7 @@ h1 {
   height: 40px;
   border-radius: 10px;
   cursor: pointer;
+  transition: opacity 0.3s;
 }
 
 #nail1 { top: 60px; left: 50px; }
@@ -82,6 +83,7 @@ h1 {
   width: 40px;
   height: 40px;
   border-radius: 5px;
+  transition: opacity 0.3s;
 }
 
 .swatch {
@@ -104,7 +106,7 @@ h1 {
   margin-top: 10px;
 }
 
-.controls button {
+.controls button, .controls input {
   padding: 8px 16px;
   background: #d81b60;
   color: white;
@@ -114,7 +116,13 @@ h1 {
   font-size: 1em;
 }
 
-.controls button:hover {
+.controls input {
+  background: #fff;
+  color: #d81b60;
+  border: 1px solid #d81b60;
+}
+
+.controls button:hover, .controls input:hover {
   background: #b0003a;
 }
 
@@ -124,7 +132,7 @@ h1 {
     justify-content: center;
     gap: 40px;
   }
-  .hand img {
+  #handCanvas {
     width: 300px;
   }
 }
