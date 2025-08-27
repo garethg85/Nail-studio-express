@@ -2,28 +2,39 @@ body {
   font-family: sans-serif;
   background: #fce4ec;
   text-align: center;
+  margin: 0;
+  padding: 10px;
+}
+
+h1 {
+  color: #d81b60;
+  font-size: 2em;
 }
 
 .studio {
   display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
 }
 
 .hand {
   position: relative;
+  max-width: 100%;
 }
 
 .hand img {
-  width: 300px;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .nails canvas {
   position: absolute;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -33,10 +44,32 @@ body {
 #nail4 { top: 50px; left: 200px; }
 #nail5 { top: 60px; left: 250px; }
 
+#zoom {
+  width: 160px;
+  height: 160px;
+  border: 2px solid #d81b60;
+  border-radius: 20px;
+  margin: 10px auto;
+}
+
+.palette {
+  max-width: 100%;
+  padding: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.palette h2 {
+  font-size: 1.2em;
+  color: #d81b60;
+  margin: 10px 0;
+}
+
 .palette div {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   justify-content: center;
 }
 
@@ -45,8 +78,50 @@ body {
   height: 40px;
   cursor: pointer;
   border: 2px solid transparent;
+  border-radius: 5px;
 }
 
 .palette img:hover {
   border-color: #d81b60;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.controls button {
+  padding: 8px 16px;
+  background: #d81b60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.controls button:hover {
+  background: #b0003a;
+}
+
+@media (min-width: 600px) {
+  .studio {
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+  }
+  .hand img {
+    width: 300px;
+  }
+  #nail1, #nail2, #nail3, #nail4, #nail5 {
+    width: 40px;
+    height: 40px;
+  }
+  #zoom {
+    width: 160px;
+    height: 160px;
+  }
 }
