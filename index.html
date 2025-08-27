@@ -11,7 +11,7 @@
   <p class="dedication">Made with love for [Wife’s Name]</p>
   <div class="studio">
     <div class="hand">
-      <img src="assets/hand.png" alt="Hand">
+      <canvas id="handCanvas" width="300" height="300"></canvas>
       <div class="nails">
         <canvas id="nail1"></canvas>
         <canvas id="nail2"></canvas>
@@ -24,7 +24,7 @@
     <div class="palette">
       <h2>Colors</h2>
       <div id="colors"></div>
-      <h2>Stickers</h2>
+      <h2>Designs</h2>
       <div id="stickers"></div>
       <div class="controls">
         <button onclick="showHand()">Show Hand</button>
@@ -32,6 +32,7 @@
         <button onclick="clearNail()">Clear Nail</button>
         <button onclick="resetNails()">Refresh</button>
         <button onclick="saveDesign()">Save Design</button>
+        <input type="file" id="uploadHand" accept="image/*" onchange="loadCustomHand(event)">
       </div>
     </div>
   </div>
