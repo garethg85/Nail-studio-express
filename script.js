@@ -72,4 +72,5 @@ function resetNails() {
   selectedSticker = null;
 }
 
+
 loadPalette();
