@@ -1,9 +1,9 @@
 const nails = [
-  { canvas: document.getElementById("nail1"), coords: { x: 50, y: 60 }, shape: 'thumb' },
-  { canvas: document.getElementById("nail2"), coords: { x: 100, y: 50 }, shape: 'finger' },
-  { canvas: document.getElementById("nail3"), coords: { x: 150, y: 40 }, shape: 'finger' },
-  { canvas: document.getElementById("nail4"), coords: { x: 200, y: 50 }, shape: 'finger' },
-  { canvas: document.getElementById("nail5"), coords: { x: 250, y: 60 }, shape: 'pinky' }
+  { canvas: document.getElementById("nail1"), coords: { x: 60, y: 70 }, shape: 'thumb' },
+  { canvas: document.getElementById("nail2"), coords: { x: 110, y: 60 }, shape: 'finger' },
+  { canvas: document.getElementById("nail3"), coords: { x: 160, y: 50 }, shape: 'finger' },
+  { canvas: document.getElementById("nail4"), coords: { x: 210, y: 60 }, shape: 'finger' },
+  { canvas: document.getElementById("nail5"), coords: { x: 260, y: 70 }, shape: 'pinky' }
 ];
 const zoomCanvas = document.getElementById("zoom");
 const handCanvas = document.getElementById("handCanvas");
@@ -13,29 +13,6 @@ let selectedNail = null;
 let viewMode = 'hand';
 let customHandImage = null;
 
-function drawHand(ctx) {
-  ctx.fillStyle = "#f5d7c6"; // Skin tone
-  ctx.beginPath();
-  ctx.moveTo(50, 250);
-  ctx.quadraticCurveTo(150, 300, 250, 250);
-  ctx.quadraticCurveTo(300, 150, 250, 50);
-  ctx.quadraticCurveTo(150, 0, 50, 50);
-  ctx.quadraticCurveTo(0, 150, 50, 250);
-  ctx.fill();
-  nails.forEach(nail => {
-    ctx.fillStyle = "#fff";
-    ctx.beginPath();
-    if (nail.shape === 'thumb') {
-      ctx.ellipse(nail.coords.x + 20, nail.coords.y + 20, 14, 20, 0, 0, Math.PI * 2);
-    } else if (nail.shape === 'pinky') {
-      ctx.ellipse(nail.coords.x + 20, nail.coords.y + 20, 10, 15, 0, 0, Math.PI * 2);
-    } else {
-      ctx.ellipse(nail.coords.x + 20, nail.coords.y + 20, 12, 18, 0, 0, Math.PI * 2);
-    }
-    ctx.fill();
-  });
-}
-
 function loadCustomHand(event) {
   const file = event.target.files[0];
   if (file) {
@@ -44,19 +21,17 @@ function loadCustomHand(event) {
       customHandImage = img;
       const ctx = handCanvas.getContext("2d");
       ctx.clearRect(0, 0, handCanvas.width, handCanvas.height);
-      ctx.drawImage(img, 0, 0, 300, 300);
+      ctx.drawImage(img, 0, 0, 300, 300); // Ensure 300x300
     };
     img.src = URL.createObjectURL(file);
   }
 }
 
 function loadPalette() {
-  const colors = [
-    "red", "blue", "green", "yellow", "orange", "purple", "pink", "black", "white", "brown",
+  const colors = ["red", "blue", "green", "yellow", "orange", "purple", "pink", "black", "white", "brown",
     "gold", "silver", "bronze", "rose-gold", "chrome",
     "baby-blue", "mint", "lavender", "peach", "cream",
-    "glitter-red", "glitter-pink", "holo", "neon-green", "neon-purple"
-  ];
+    "glitter-red", "glitter-pink", "holo", "neon-green", "neon-purple"];
   const stickers = ["heart", "star", "ombre-pink", "floral-daisy", "smile"];
 
   const colorContainer = document.getElementById("colors");
@@ -101,64 +76,20 @@ function drawSticker(ctx, sticker) {
   ctx.fillStyle = sticker === "ombre-pink" ? "pink" : sticker === "floral-daisy" ? "white" : "black";
   ctx.beginPath();
   switch (sticker) {
-    case "heart":
-      ctx.moveTo(20, 10);
-      ctx.bezierCurveTo(10, 0, 0, 10, 10, 25);
-      ctx.bezierCurveTo(20, 40, 20, 40, 30, 25);
-      ctx.bezierCurveTo(40, 10, 30, 0, 20, 10);
-      break;
-    case "star":
-      for (let i = 0; i < 5; i++) {
-        ctx.lineTo(20 + 15 * Math.cos((Math.PI * 2 * i) / 5 - Math.PI / 2), 20 + 15 * Math.sin((Math.PI * 2 * i) / 5 - Math.PI / 2));
-        ctx.lineTo(20 + 7 * Math.cos((Math.PI * 2 * (i + 0.5)) / 5 - Math.PI / 2), 20 + 7 * Math.sin((Math.PI * 2 * (i + 0.5)) / 5 - Math.PI / 2));
-      }
-      break;
-    case "ombre-pink":
-      const gradient = ctx.createLinearGradient(0, 0, 40, 40);
-      gradient.addColorStop(0, "pink");
-      gradient.addColorStop(1, "white");
-      ctx.fillStyle = gradient;
-      ctx.rect(0, 0, 40, 40);
-      break;
-    case "floral-daisy":
-      ctx.arc(20, 20, 10, 0, Math.PI * 2);
-      for (let i = 0; i < 6; i++) {
-        ctx.arc(20 + 10 * Math.cos((Math.PI * 2 * i) / 6), 20 + 10 * Math.sin((Math.PI * 2 * i) / 6), 5, 0, Math.PI * 2);
-      }
-      ctx.fillStyle = "yellow";
-      ctx.arc(20, 20, 5, 0, Math.PI * 2);
-      break;
-    case "smile":
-      ctx.arc(20, 20, 15, 0, Math.PI * 2);
-      ctx.moveTo(15, 15);
-      ctx.arc(15, 15, 3, 0, Math.PI * 2);
-      ctx.moveTo(25, 15);
-      ctx.arc(25, 15, 3, 0, Math.PI * 2);
-      ctx.moveTo(25, 25);
-      ctx.arc(20, 25, 5, 0, Math.PI);
-      break;
+    case "heart": ctx.moveTo(20, 10); ctx.bezierCurveTo(10, 0, 0, 10, 10, 25); ctx.bezierCurveTo(20, 40, 20, 40, 30, 25); ctx.bezierCurveTo(40, 10, 30, 0, 20, 10); break;
+    case "star": for (let i = 0; i < 5; i++) { ctx.lineTo(20 + 15 * Math.cos((Math.PI * 2 * i) / 5 - Math.PI / 2), 20 + 15 * Math.sin((Math.PI * 2 * i) / 5 - Math.PI / 2)); ctx.lineTo(20 + 7 * Math.cos((Math.PI * 2 * (i + 0.5)) / 5 - Math.PI / 2), 20 + 7 * Math.sin((Math.PI * 2 * (i + 0.5)) / 5 - Math.PI / 2)); } break;
+    case "ombre-pink": const gradient = ctx.createLinearGradient(0, 0, 40, 40); gradient.addColorStop(0, "pink"); gradient.addColorStop(1, "white"); ctx.fillStyle = gradient; ctx.rect(0, 0, 40, 40); break;
+    case "floral-daisy": ctx.arc(20, 20, 10, 0, Math.PI * 2); for (let i = 0; i < 6; i++) ctx.arc(20 + 10 * Math.cos((Math.PI * 2 * i) / 6), 20 + 10 * Math.sin((Math.PI * 2 * i) / 6), 5, 0, Math.PI * 2); ctx.fillStyle = "yellow"; ctx.arc(20, 20, 5, 0, Math.PI * 2); break;
+    case "smile": ctx.arc(20, 20, 15, 0, Math.PI * 2); ctx.moveTo(15, 15); ctx.arc(15, 15, 3, 0, Math.PI * 2); ctx.moveTo(25, 15); ctx.arc(25, 15, 3, 0, Math.PI * 2); ctx.moveTo(25, 25); ctx.arc(20, 25, 5, 0, Math.PI); break;
   }
   ctx.fill();
 }
 
 function drawNailShape(ctx, shape) {
   ctx.beginPath();
-  if (shape === 'thumb') {
-    ctx.moveTo(12, 40);
-    ctx.quadraticCurveTo(0, 20, 12, 0);
-    ctx.lineTo(28, 0);
-    ctx.quadraticCurveTo(40, 20, 28, 40);
-  } else if (shape === 'pinky') {
-    ctx.moveTo(15, 40);
-    ctx.quadraticCurveTo(5, 15, 15, 0);
-    ctx.lineTo(25, 0);
-    ctx.quadraticCurveTo(35, 15, 25, 40);
-  } else {
-    ctx.moveTo(10, 40);
-    ctx.quadraticCurveTo(0, 20, 10, 0);
-    ctx.lineTo(30, 0);
-    ctx.quadraticCurveTo(40, 20, 30, 40);
-  }
+  if (shape === 'thumb') { ctx.moveTo(12, 40); ctx.quadraticCurveTo(0, 20, 12, 0); ctx.lineTo(28, 0); ctx.quadraticCurveTo(40, 20, 28, 40); }
+  else if (shape === 'pinky') { ctx.moveTo(15, 40); ctx.quadraticCurveTo(5, 15, 15, 0); ctx.lineTo(25, 0); ctx.quadraticCurveTo(35, 15, 25, 40); }
+  else { ctx.moveTo(10, 40); ctx.quadraticCurveTo(0, 20, 10, 0); ctx.lineTo(30, 0); ctx.quadraticCurveTo(40, 20, 30, 40); }
   ctx.closePath();
   ctx.clip();
 }
@@ -195,7 +126,8 @@ function paintZoom() {
   const ctx = zoomCanvas.getContext("2d");
   ctx.clearRect(0, 0, zoomCanvas.width, zoomCanvas.height);
   ctx.save();
-  ctx.scale(4, 4);
+  // Adjusted scale for 240x240 canvas
+  ctx.scale(2.5, 2.5); // Reduced from 4x to 2.5x
   drawNailShape(ctx, selectedNail.shape);
   if (selectedColor) {
     ctx.fillStyle = selectedColor.includes("glitter") || selectedColor.includes("neon") || selectedColor.includes("holo")
@@ -208,7 +140,9 @@ function paintZoom() {
     ctx.fill();
   }
   if (selectedSticker) {
+    ctx.save();
     drawSticker(ctx, selectedSticker);
+    ctx.restore();
   }
   ctx.restore();
 }
@@ -219,7 +153,7 @@ nails.forEach(nailObj => {
   nailObj.canvas.onclick = () => {
     selectedNail = nailObj;
     paintNail(nailObj);
-    showFinger(); // Auto-zoom on nail click
+    showFinger();
   };
 });
 
@@ -230,7 +164,9 @@ function showHand() {
   if (customHandImage) {
     ctx.drawImage(customHandImage, 0, 0, 300, 300);
   } else {
-    drawHand(ctx);
+    // Fallback if no image loaded (optional)
+    ctx.fillStyle = "#f5d7c6";
+    ctx.fillRect(0, 0, 300, 300);
   }
   zoomCanvas.style.display = "none";
   nails.forEach(nailObj => nailObj.canvas.style.display = "block");
@@ -244,6 +180,7 @@ function showFinger() {
   viewMode = 'finger';
   const ctx = handCanvas.getContext("2d");
   ctx.clearRect(0, 0, handCanvas.width, handCanvas.height);
+  if (customHandImage) ctx.drawImage(customHandImage, 0, 0, 300, 300);
   nails.forEach(nailObj => nailObj.canvas.style.display = nailObj === selectedNail ? "block" : "none");
   zoomCanvas.style.display = "block";
   paintZoom();
@@ -279,7 +216,8 @@ function saveDesign() {
   if (customHandImage) {
     ctx.drawImage(customHandImage, 0, 0, 300, 300);
   } else {
-    drawHand(ctx);
+    ctx.fillStyle = "#f5d7c6";
+    ctx.fillRect(0, 0, 300, 300);
   }
   nails.forEach(nailObj => {
     ctx.drawImage(nailObj.canvas, nailObj.coords.x, nailObj.coords.y);
@@ -293,9 +231,8 @@ function saveDesign() {
   link.click();
 }
 
-const handCtx = handCanvas.getContext("2d");
-drawHand(handCtx);
+loadCustomHand({ target: { files: [new File([], "hand.png")] } }); // Trigger initial load if already uploaded
 loadPalette();
-zoomCanvas.width = 160;
-zoomCanvas.height = 160;
+zoomCanvas.width = 240;
+zoomCanvas.height = 240;
 showHand();
