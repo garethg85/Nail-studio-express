@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Nail Studio Express</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -16,6 +17,7 @@
         <canvas id="nail3"></canvas>
         <canvas id="nail4"></canvas>
         <canvas id="nail5"></canvas>
+        <canvas id="zoom" style="display: none;"></canvas>
       </div>
     </div>
     <div class="palette">
@@ -23,7 +25,13 @@
       <div id="colors"></div>
       <h2>Stickers</h2>
       <div id="stickers"></div>
-      <button onclick="resetNails()">Reset</button>
+      <div class="controls">
+        <button onclick="showHand()">Show Hand</button>
+        <button onclick="showFinger()">Show Finger</button>
+        <button onclick="clearNail()">Clear Nail</button>
+        <button onclick="resetNails()">Refresh</button>
+        <button onclick="saveDesign()">Save Design</button>
+      </div>
     </div>
   </div>
   <script src="script.js"></script>
