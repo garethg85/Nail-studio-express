@@ -18,7 +18,6 @@
         <canvas id="nail3"></canvas>
         <canvas id="nail4"></canvas>
         <canvas id="nail5"></canvas>
-        <canvas id="zoom" style="display: none;"></canvas>
       </div>
     </div>
     <div class="palette">
@@ -34,6 +33,9 @@
         <button onclick="saveDesign()">Save Design</button>
         <input type="file" id="uploadHand" accept="image/*" onchange="loadCustomHand(event)">
       </div>
+    </div>
+    <div class="zoom-area">
+      <canvas id="zoom" style="display: none;"></canvas>
     </div>
   </div>
   <script src="script.js"></script>
